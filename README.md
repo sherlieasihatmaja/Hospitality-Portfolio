@@ -1,2 +1,0 @@
-# Hospitality-Portfolio
-Hospitality Portfolio
