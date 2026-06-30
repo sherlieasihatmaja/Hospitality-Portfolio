@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Ratih Triana</title>
+  
+  <!-- 
+    DOKUMENTASI FONT:
+    - Playfair Display: Untuk judul (Heading) memberikan kesan mewah dan klasik.
+    - Lato: Untuk isi teks (Body) agar mudah dibaca di layar digital.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------------------------------------------------
+       1. RESET & VARIABEL (Parameter Warna Luxury)
+       --------------------------------------------------- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Warna Utama */
+      --bg-dark: #071e17;       /* Hijau Zamrud Sangat Gelap (Luxury Green) */
+      --bg-card: #0a271f;       /* Sedikit lebih terang untuk kotak */
+      
+      /* Aksen Emas */
+      --gold-main: #d4af37;     /* Metallic Gold */
+      --gold-light: #f3e5ab;    /* Champagne Gold (untuk hover) */
+      --gold-dark: #aa8529;     /* Emas tua untuk bayangan/garis */
+      
+      /* Warna Teks */
+      --text-main: #fcfcfc;     /* Putih bersih */
+      --text-muted: #b0c4b1;    /* Hijau pucat/abu-abu untuk teks sekunder */
+      
+      /* Variabel Font */
+      --font-head: 'Playfair Display', serif;
+      --font-body: 'Lato', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.8;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      /* Menambahkan tekstur halus pada background */
+      background-image: linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    ::selection { background: var(--gold-main); color: #000; }
+
+    /* ---------------------------------------------------
+       2. NAVIGASI (Garis Emas Elegan)
+       --------------------------------------------------- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 5rem;
+      background: rgba(7, 30, 23, 0.95);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      backdrop-filter: blur(10px);
+    }
+    .nav-logo { 
+      font-family: var(--font-head); font-size: 1.8rem; font-weight: 700; 
+      color: var(--gold-main); text-decoration: none; letter-spacing: 2px;
+    }
+    .nav-links { display: flex; gap: 3rem; list-style: none; }
+    .nav-links a { 
+      color: var(--text-main); text-decoration: none; font-size: 0.9rem; 
+      font-weight: 400; text-transform: uppercase; letter-spacing: 2px;
+      transition: color 0.3s; position: relative;
+    }
+    /* Animasi garis bawah emas saat hover */
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
+      width: 0; height: 1px; background: var(--gold-main); transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold-main); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-links a.active { color: var(--gold-main); }
+
+    /* ---------------------------------------------------
+       3. TOMBOL (Luxury Button)
+       --------------------------------------------------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 1rem 2.5rem; font-family: var(--font-body); font-size: 0.9rem; 
+      font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+      text-decoration: none; cursor: pointer; transition: all 0.4s ease;
+    }
+    .btn-gold { 
+      background: transparent; color: var(--gold-main); 
+      border: 1px solid var(--gold-main);
+    }
+    .btn-gold:hover { 
+      background: var(--gold-main); color: var(--bg-dark); 
+      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+    }
+    .btn-solid {
+      background: var(--gold-main); color: var(--bg-dark);
+      border: 1px solid var(--gold-main);
+    }
+    .btn-solid:hover {
+      background: transparent; color: var(--gold-main);
+    }
+
+    /* ---------------------------------------------------
+       4. HERO SECTION
+       --------------------------------------------------- */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column; 
+      align-items: center; justify-content: center; text-align: center;
+      padding: 8rem 2rem 4rem; position: relative;
+    }
+    
+    .hero-photo-wrap {
+      width: 180px; height: 180px; border-radius: 50%;
+      padding: 6px; border: 1px solid var(--gold-main);
+      margin-bottom: 2.5rem; position: relative;
+    }
+    /* Lingkaran dekoratif luar */
+    .hero-photo-wrap::before {
+      content: ''; position: absolute; top: -15px; left: -15px; right: -15px; bottom: -15px;
+      border: 1px dashed rgba(212, 175, 55, 0.4); border-radius: 50%;
+      animation: rotate 20s linear infinite;
+    }
+    @keyframes rotate { 100% { transform: rotate(360deg); } }
+    
+    .hero-photo {
+      width: 100%; height: 100%; border-radius: 50%; overflow: hidden; 
+      cursor: pointer; position: relative; background-color: var(--bg-card);
+      display: flex; align-items: center; justify-content: center;
+    }
+    /* Memberi efek elegan pada foto */
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; top:0; left:0; filter: sepia(30%) contrast(1.1); transition: filter 0.4s;}
+    .hero-photo:hover img { filter: sepia(0%); }
+    .photo-ph { font-family: var(--font-head); font-size: 0.9rem; color: var(--gold-main); pointer-events: none;}
+    
+    .hero-label { font-family: var(--font-body); font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .hero-name { font-family: var(--font-head); font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 400; line-height: 1.1; margin-bottom: 2rem; color: var(--gold-light); }
+    .hero-tagline { font-size: 1.1rem; color: var(--text-muted); max-width: 650px; margin-bottom: 3rem; font-weight: 300; }
+    .hero-cta { display: flex; gap: 1.5rem; justify-content: center; }
+
+    /* ---------------------------------------------------
+       5. STRUKTUR SECTION UMUM
+       --------------------------------------------------- */
+    section { padding: 8rem 4rem; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid rgba(212, 175, 55, 0.1); }
+    .section-header { text-align: center; margin-bottom: 5rem; }
+    .section-label { font-size: 0.85rem; color: var(--gold-main); letter-spacing: 3px; text-transform: uppercase; display: block; margin-bottom: 1rem;}
+    .section-title { font-family: var(--font-head); font-size: 3rem; font-weight: 400; color: var(--gold-light); }
+    /* Garis pemisah ornamen */
+    .ornament-line { width: 1px; height: 60px; background: var(--gold-main); margin: 0 auto 1rem; }
+
+    /* ---------------------------------------------------
+       6. ABOUT (2 Kolom Presisi)
+       --------------------------------------------------- */
+    .about-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; }
+    .about-bio { font-size: 1rem; color: var(--text-muted); line-height: 2; font-weight: 300; }
+    .about-bio strong { color: var(--gold-light); font-weight: 400; font-family: var(--font-head); font-size: 1.2rem;}
+    
+    .stats-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    .stat-box { border: 1px solid rgba(212, 175, 55, 0.3); padding: 2.5rem 1.5rem; text-align: center; background: var(--bg-card); transition: transform 0.3s; }
+    .stat-box:hover { transform: translateY(-5px); border-color: var(--gold-main); }
+    .stat-val { font-family: var(--font-head); font-size: 1.8rem; font-weight: 400; color: var(--gold-main); margin-bottom: 0.5rem; display: block;}
+    .stat-lbl { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+    /* ---------------------------------------------------
+       7. SKILLS (Minimalist Lists)
+       --------------------------------------------------- */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 3rem; }
+    .skill-col h3 { font-family: var(--font-head); font-size: 1.4rem; color: var(--gold-light); margin-bottom: 1.5rem; font-weight: 400; letter-spacing: 1px;}
+    .skill-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .skill-list li { font-size: 1rem; color: var(--text-muted); display: flex; align-items: center; gap: 15px; font-weight: 300; }
+    .skill-list li::before { content: '♦'; color: var(--gold-main); font-size: 0.7rem; }
+
+    /* ---------------------------------------------------
+       8. PROJECTS (Editorial Style)
+       --------------------------------------------------- */
+    .projects-list { display: flex; flex-direction: column; gap: 6rem; }
+    .project-card { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .project-card:nth-child(even) { direction: rtl; } 
+    .project-card:nth-child(even) > * { direction: ltr; }
+    
+    .proj-info { padding: 1rem 0; }
+    .proj-name { font-family: var(--font-head); font-size: 2.2rem; font-weight: 400; color: var(--gold-light); margin-bottom: 1rem; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+    .proj-tag { font-size: 0.75rem; color: var(--gold-main); text-transform: uppercase; letter-spacing: 2px; }
+    .proj-desc { font-size: 1.05rem; color: var(--text-muted); line-height: 1.9; font-weight: 300; }
+    
+    .proj-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .proj-imgs .img-slot:first-child { grid-column: span 2; height: 280px; }
+    .img-slot { height: 140px; background: var(--bg-card); position: relative; overflow: hidden; cursor: pointer; border: 1px solid rgba(212, 175, 55, 0.2); }
+    .img-slot img { width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; top:0; left:0; transition: transform 0.5s ease; filter: sepia(20%);}
+    .img-slot:hover img { transform: scale(1.05); filter: sepia(0%);}
+    .slot-ph { display: flex; align-items: center; justify-content: center; height: 100%; font-family: var(--font-head); color: var(--gold-main); font-style: italic; opacity: 0.7; pointer-events: none;}
+
+    /* ---------------------------------------------------
+       8A. Addition (Editorial Style)
+       --------------------------------------------------- */
+    .education-gallery-container { width: 100%; max-width: 850px; margin: 40px auto; display: flex; flex-direction: column; gap: 20px; padding: 0 20px; box-sizing: border-box;}
+    .edu-slot-besar { width: 100%; height: auto; position: relative; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.2);}
+    .edu-baris-bawah { display: flex; justify-content: center; gap: 20px; width: 100%; flex-wrap: wrap;}
+    .edu-slot-kecil { flex: 1; min-width: 280px; max-width: 415px; position: relative; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.2);}
+    .edu-slot-besar img,
+    .edu-slot-kecil img { width: 100% !important; height: auto !important; display: block !important; transition: transform 0.5s ease;}
+    .edu-slot-besar:hover img,
+    .edu-slot-kecil:hover img { transform: scale(1.03);}
+    .edu-slot-besar .slot-ph,
+    .edu-slot-kecil .slot-ph { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: rgba(0, 0, 0, 0.5); color: #fff; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;}
+    .edu-slot-besar:hover .slot-ph,
+    .edu-slot-kecil:hover .slot-ph { opacity: 1;}
+    
+    /* ---------------------------------------------------
+       9. EXPERIENCE (Classic Timeline)
+       --------------------------------------------------- */
+    .exp-container { max-width: 800px; margin: 0 auto; border-left: 1px solid var(--gold-main); padding-left: 3rem; }
+    .exp-item { position: relative; margin-bottom: 4rem; }
+    .exp-item:last-child { margin-bottom: 0; }
+    /* Titik timeline emas */
+    .exp-item::before { content: ''; position: absolute; left: -3.35rem; top: 0.5rem; width: 11px; height: 11px; background: var(--gold-main); border-radius: 50%; box-shadow: 0 0 0 4px var(--bg-dark); }
+    
+    .exp-dates { font-size: 0.85rem; color: var(--gold-main); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+    .exp-role { font-family: var(--font-head); font-size: 1.8rem; font-weight: 400; color: var(--text-main); margin-bottom: 0.3rem; }
+    .exp-org { font-size: 1rem; color: var(--text-muted); font-weight: 400; font-style: italic; display: block; margin-bottom: 1.5rem;}
+    .exp-desc { font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
+    
+    .exp-imgs { display: flex; gap: 15px; margin-top: 1.5rem; }
+    .exp-imgs .img-slot { height: 100px; width: 150px; border: 1px solid rgba(212, 175, 55, 0.2); }
+
+    /* ---------------------------------------------------
+       10. CONTACT & FOOTER
+       --------------------------------------------------- */
+    #contact { text-align: center; border-bottom: none; padding-bottom: 8rem; }
+    .contact-card { padding: 4rem; border: 1px solid rgba(212, 175, 55, 0.3); background: var(--bg-card); max-width: 800px; margin: 0 auto; }
+    .contact-headline { font-family: var(--font-head); font-size: 3rem; font-weight: 400; color: var(--gold-light); margin-bottom: 1rem; }
+    .contact-sub { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 3rem; font-weight: 300; }
+    .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+
+    footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(212, 175, 55, 0.2); font-size: 0.85rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;}
+
+    /* ---------------------------------------------------
+       11. ANIMASI FADE & LIGHTBOX
+       --------------------------------------------------- */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    .lightbox { display: flex; position: fixed; inset: 0; background: rgba(7, 30, 23, 0.95); z-index: 9999; align-items: center; justify-content: center; cursor: zoom-out; pointer-events: none; opacity: 0; transition: all 0.4s ease; backdrop-filter: blur(5px); }
+    .lightbox.active { opacity: 1; pointer-events: all; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border: 1px solid var(--gold-main); padding: 5px; transform: scale(0.95); transition: transform 0.4s ease; background: var(--bg-dark); }
+    .lightbox.active img { transform: scale(1); }
+
+    /* ---------------------------------------------------
+       12. RESPONSIVE (Layar Handphone)
+       --------------------------------------------------- */
+    @media (max-width: 992px) {
+      nav { padding: 1rem 1.5rem; justify-content: center; }
+      .nav-links { display: none; }
+      
+      #hero { padding: 8rem 1.5rem 4rem; }
+      .hero-name { font-size: 2.8rem; }
+      .hero-cta { flex-direction: column; width: 100%; max-width: 300px; }
+      
+      section { padding: 4rem 1.5rem; }
+      .about-layout, .project-card { grid-template-columns: 1fr; gap: 3rem; }
+      .project-card:nth-child(even) { direction: ltr; }
+      
+      .exp-container { padding-left: 1.5rem; }
+      .exp-item::before { left: -1.85rem; }
+      .exp-imgs { flex-wrap: wrap; }
+      .exp-imgs .img-slot { width: 100%; height: 180px; }
+      
+      .contact-card { padding: 3rem 1.5rem; }
+      .contact-links { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Input file tersembunyi untuk fungsionalitas JS -->
+  <input type="file" id="fi-hero" accept="image/*" style="display:none" />
+  <input type="file" id="fi-p1-1" accept="image/*" style="display:none" />
+  <input type="file" id="fi-p1-2" accept="image/*" style="display:none" />
+  <input type="file" id="fi-p1-3" accept="image/*" style="display:none" />
+  <input type="file" id="fi-p2-1" accept="image/*" style="display:none" />
+  <input type="file" id="fi-p2-2" accept="image/*" style="display:none" />
+  <input type="file" id="fi-p2-3" accept="image/*" style="display:none" />
+  <input type="file" id="fi-e1-1" accept="image/*" style="display:none" />
+  <input type="file" id="fi-e1-2" accept="image/*" style="display:none" />
+  <input type="file" id="fi-e1-3" accept="image/*" style="display:none" />
+  <input type="file" id="fi-e2-1" accept="image/*" style="display:none" />
+  <input type="file" id="fi-e2-2" accept="image/*" style="display:none" />
+  <input type="file" id="fi-e2-3" accept="image/*" style="display:none" />
+  <input type="file" id="fi-e2-4" accept="image/*" style="display:none" />
+
+  <nav class="fade-in">
+    <a href="#hero" class="nav-logo">Ratih.</a>
+    <ul class="nav-links">
+      <li><a href="#about" class="nav-link">Profile</a></li>
+      <li><a href="#skills" class="nav-link">Expertise</a></li>
+      <li><a href="#projects" class="nav-link">Education</a></li>
+      <li><a href="#experience" class="nav-link">Experience</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-photo-wrap fade-in">
+      <div class="hero-photo" id="hero-photo-el">
+        <div class="photo-ph" id="hero-ph" style="display:none;">Upload</div>
+        <img id="hero-img" src="poto1.jpeg" alt="Foto profil" style="display:block;" />
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="ornament-line"></div>
+      <span class="hero-label">Hospitality Professional</span>
+      <h1 class="hero-name">Ratih Triana</h1>
+      <p class="hero-tagline">
+        A highly motivated and service-oriented for hospitality and guest satisfaction.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-solid">Background</a>
+        <a href="#contact" class="btn btn-gold">Contact Me</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-header fade-in">
+      <span class="section-label">Biography</span>
+      <h2 class="section-title">About Me</h2>
+    </div>
+    <div class="about-layout fade-in">
+      <div class="about-bio">
+        <p>Welcome. I am <strong>Ratih Triana</strong>, a graduate of Office Administration from Vocational Highschool and completed professional hospitality training at PPKD Central Jakarta, with a focus on Front Office, Housekeeping, and Food & Beverage Service operations. The program provided both theoretical knowledge and practical experience in guest service, hotel operations, communication, and hospitality standards.</p><br>
+        <p>I Have Experienced in customer-facing roles, including receptionist, sales operational and caregiver in Hong Kong. Known for being friendly, adapted to a fast-paced international environment, developing problem-solving skills and responsible, with a strong motivation to grow and contribute to the hospitality industry. </p><br>
+        <p>Outside of my professional pursuits, I enjoy traveling and exploring nature because it allows me to discover different cultures, traditions, and ways of life. Meeting people from around the world has helped me improve my communication skills, develop cultural sensitivity, and build meaningful connections with individuals from diverse backgrounds. These qualities support my passion for working in the international hospitality industry.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-val">ID, EN, CANTONESE</span>
+          <span class="stat-lbl">Languages</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val">Caregiver</span>
+          <span class="stat-lbl">Hongkong</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val">Developing</span>
+          <span class="stat-lbl">Service Excellence</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val">Strong</span>
+          <span class="stat-lbl">Communication</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-header fade-in">
+      <span class="section-label">Competencies</span>
+      <h2 class="section-title">Core Expertise</h2>
+    </div>
+    <div class="skills-grid fade-in">
+      <div class="skill-col">
+        <h3>Languages</h3>
+        <ul class="skill-list">
+          <li>Indonesian (Native)</li>
+          <li>English (Intermediate)</li>
+          <li>Cantonese (Beginner)</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>Caregiver</h3>
+        <ul class="skill-list">
+          <li>Elderly Care Assistance</li>
+          <li>Compassion and Empathy</li>
+          <li>Patience and Emotional Resilience</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>Soft Skills</h3>
+        <ul class="skill-list">
+          <li>Guest Service Excellence</li>
+          <li>Professional Communication</li>
+          <li>Problem Solving </li>
+          <li>Teamwork</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>Technical</h3>
+        <ul class="skill-list">
+          <li>Microsoft Office</li>
+          <li>Time Management</li>
+          <li>Housekeeping Operations</li>
+          <li>Food & Beverage Service</li>
+          <li>Front Office Operations</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-header fade-in">
+      <span class="section-label">Selected Work</span>
+      <h2 class="section-title">Education</h2>
+    </div>
+    
+    <div class="projects-list">
+      
+      <!-- Projects 1 -->
+      <div class="project-card fade-in">
+        <div class="proj-info">
+          <h3 class="proj-name">PPKD Central Jakarta</h3>
+          <div class="proj-tags">
+            <span>Housekeeping</span> | <span>Front Office</span> | <span>F&B Service</span>
+          </div>
+          <p class="proj-desc">Completed an intensive hospitality training program focused on developing operational knowledge and practical skills across key hotel departments, including Front Office, Food & Beverage Service, Housekeeping Room Attendant, and Public Area Operations. The program combined classroom instruction with hands-on practical training based on industry standards and hospitality best practices.</p> 
+          <p class="proj-desc"><strong>BNSP Competency Certificate in Hotel Operations/Hospitality</strong></p>
+        </div>
+        <div class="proj-imgs">
+          <div class="img-slot" data-fi="fi-p1-1"><img src="poto2.jpeg" style="display:block;" /><div class="slot-ph">View</div></div>
+          <div class="img-slot" data-fi="fi-p1-2"><img src="poto3.jpeg" style="display:block;" /><div class="slot-ph">View</div></div>
+          <div class="img-slot" data-fi="fi-p1-3"><img src="poto4.jpeg" style="display:block;" /><div class="slot-ph">View</div></div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+  
+      <!-- Education 2 -->
+      <div class="education-gallery-container">
+       <div class="edu-slot-besar">
+        <img src="poto5.jpeg" alt="Training 1" />
+      <div class="slot-ph">View</div>
+     </div>
+
+     <div class="edu-baris-bawah">
+      <div class="edu-slot-besar">
+       <img src="poto6.jpeg" alt="Training 2" />
+     <div class="slot-ph">View</div>
+     </div>
+
+     <div class="edu-baris-bawah">
+      <div class="edu-slot-besar">
+       <img src="poto7.jpeg" alt="Training 3" />
+     <div class="slot-ph">View</div>
+     </div>
+
+     <div class="edu-baris-bawah">
+      <div class="edu-slot-besar">
+       <img src="poto8.jpeg" alt="Training 4" />
+     <div class="slot-ph">View</div>
+     </div>
+
+     <div class="edu-baris-bawah">
+      <div class="edu-slot-besar">
+       <img src="poto9.jpeg" alt="Training 5" />
+     <div class="slot-ph">View</div>
+     </div>
+
+       
+     <div class="edu-baris-bawah">
+      <div class="edu-slot-besar">
+       <img src="poto10.jpeg" alt="Training 6" />
+     <div class="slot-ph">View</div>
+     </div>
+      
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-header fade-in">
+      <span class="section-label">History</span>
+      <h2 class="section-title">Career Journey</h2>
+    </div>
+    
+    <div class="exp-container">
+      
+      <!-- Experience 1 -->
+      <div class="exp-item fade-in">
+        <span class="exp-dates">Jan 2024 — Jan 2026</span>
+        <h3 class="exp-role">Caregiver</h3>
+        <span class="exp-org">Hongkong</span>
+        <p class="exp-desc">- Assisted elderly clients with personal care, mobility, and daily living activities.</p>
+        <p class="exp-desc">- Provided comprehensive care and household support for multiple family members, including elderly individuals, adults, and children.</p>
+        <p class="exp-desc">- Maintained a safe and hygienic living environment.</p>
+        <p class="exp-desc">- Provided companionship and emotional support.</p>
+        <p class="exp-desc">- Monitored clients' health conditions and reported any concerns.</p>
+        <p class="exp-desc">- Accompanied clients to appointments and community activities.</p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-card fade-in">
+      <div class="ornament-line"></div>
+      <h2 class="contact-headline">Let's Connect</h2>
+      <p class="contact-sub">I am open for Professional Collaborations, International Hospitality Opportunities and Committed to Contributing to World-Class Guest Experiences</p>
+      <div class="contact-links">
+        <a href="#" class="btn btn-solid" id="email-link">Drop an Email</a>
+        <a href="https://wa.me/6281219920873" target="_blank" class="btn btn-gold">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Ratih Triana. Hospitality Professional.</p>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <script>
+    // 1. Animasi transisi elemen (Elegan & Lambat)
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // 2. Navigasi aktif di menu panel atas
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+      let currentId = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) currentId = s.id; });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentId}`) link.classList.add('active');
+      });
+    });
+
+    // 3. Logika untuk fitur Upload & Lightbox yang andal
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    function openLightbox(src) { lightboxImg.src = src; lightbox.classList.add('active'); }
+    lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+
+    function bindUpload(triggerEl, fileInputId) {
+      const fi  = document.getElementById(fileInputId);
+      const img = triggerEl.querySelector('img');
+      const ph  = triggerEl.querySelector('.photo-ph, .slot-ph');
+
+      triggerEl.addEventListener('click', e => {
+        e.preventDefault(); e.stopPropagation();
+        if (img && img.style.display === 'block' && img.src) {
+          openLightbox(img.src);
+        } else {
+          if (fi) fi.click();
+        }
+      });
+
+      if (fi) {
+        fi.addEventListener('change', e => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = ev => {
+            if (img) {
+              img.src = ev.target.result;
+              img.style.display = 'block';
+              img.style.cursor = 'zoom-in';
+            }
+            if (ph) ph.style.display = 'none';
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+    }
+
+    const heroPhotoEl = document.getElementById('hero-photo-el');
+    if (heroPhotoEl) bindUpload(heroPhotoEl, 'fi-hero');
+
+    document.querySelectorAll('.img-slot[data-fi]').forEach(el => {
+      bindUpload(el, el.dataset.fi);
+    });
+
+    document.querySelectorAll('.img-slot img, #hero-img').forEach(img => {
+      const src = img.getAttribute('src');
+      if (src && src !== '') {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', e => {
+          e.stopPropagation();
+          openLightbox(img.src);
+        });
+      }
+    });
+
+    // 4. Deteksi aplikasi Email berdasarkan perangkat
+    const emailLink = document.getElementById('email-link');
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if(emailLink) {
+        emailLink.href = isMobile
+          ? 'mailto:ratih.triana02@gmail.com'
+          : 'https://mail.google.com/mail/?view=cm&to=ratih.triana02@gmail.com';
+        emailLink.target = isMobile ? '_self' : '_blank';
+    }
+  </script>
+</body>
+</html>
